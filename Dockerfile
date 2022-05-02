@@ -1,6 +1,6 @@
-ARG JENKINS_VERSION=2.342
+ARG JENKINS_VERSION=2.344
 
-FROM jenkins/jenkins:${JENKINS_VERSION}
+FROM jenkins/jenkins:${JENKINS_VERSION} as jenkins
 ARG NEWRELIC_PLUGIN_VERSION=1.0.5
 COPY plugins.txt /tmp/plugins.txt
 USER root
@@ -10,3 +10,9 @@ ls -l /tmp/ && \
 jenkins-plugin-cli --plugin-file /tmp/plugins.txt && bash -c "jenkins.sh &" && sleep 30 && \
 curl http://localhost:8080/jnlpJars/jenkins-cli.jar -o /usr/share/jenkins/jenkins-cli.jar && \
 cp /tmp/nr-jenkins-plugin/new-relic.hpi /usr/share/jenkins/ref/plugins/
+
+# As we just use the artefacts a smaller image can be used as final target
+FROM alpine:latest 
+COPY --from=jenkins /usr/share/jenkins/ref/plugins /usr/share/jenkins/ref/plugins
+COPY --from=jenkins /usr/share/jenkins/jenkins.war /usr/share/jenkins/jenkins.war
+COPY --from=jenkins /usr/share/jenkins/jenkins-cli.jar /usr/share/jenkins/jenkins-cli.jar
