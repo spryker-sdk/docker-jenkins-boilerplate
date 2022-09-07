@@ -2,6 +2,6 @@ metrics:4.2.10-389.v93143621b_050
 credentials:1143.vb_e8b_b_ceee347
 token-macro:308.v4f2b_ed62b_b_16
 snakeyaml-api:1.31-84.ve43da_fb_49d0b
-jackson2-api:22.13.3-285.vc03c0256d517
+jackson2-api:2.13.3-285.vc03c0256d517
 variant:59.vf075fe829ccb
 workflow-step-api:639.v6eca_cd8c04a_a_
