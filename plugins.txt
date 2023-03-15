@@ -5,3 +5,4 @@ snakeyaml-api:1.32-86.ve3f030a_75631
 jackson2-api:2.13.3-285.vc03c0256d517
 variant:59.vf075fe829ccb
 workflow-step-api:639.v6eca_cd8c04a_a_
+configuration-as-code:1569.vb_72405b_80249
