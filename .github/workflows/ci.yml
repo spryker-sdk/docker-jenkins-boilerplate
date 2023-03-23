@@ -10,7 +10,7 @@ jobs:
       matrix:
         include:
           - image: "Dockerfile"
-            tags: [ "spryker/jenkins-boilerplate:2.361.1" ]
+            tags: [ "spryker/jenkins-boilerplate:2.387.1" ]
             platforms: [ "linux/amd64", "linux/arm64" ]
     steps:
       - name: Set up QEMU
@@ -29,7 +29,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          push: ${{ github.ref == 'refs/heads/master' }}
+          push: true
           file: ${{ matrix.image }}
           tags: ${{ join(matrix.tags) }}
           platforms: ${{ join(matrix.platforms) }}
