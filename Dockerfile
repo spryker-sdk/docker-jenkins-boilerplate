@@ -9,8 +9,7 @@ cd /tmp  && unzip /tmp/newrelic.zip && \
 ls -l /tmp/ && \
 jenkins-plugin-cli --plugin-file /tmp/plugins.txt && bash -c "jenkins.sh &" && sleep 60 && \
 curl http://localhost:8080/jnlpJars/jenkins-cli.jar -o /usr/share/jenkins/jenkins-cli.jar && \
-cp /tmp/nr-jenkins-plugin/new-relic.hpi /usr/share/jenkins/ref/plugins/ && \
-cat /usr/share/jenkins/jenkins-cli.jar
+cp /tmp/nr-jenkins-plugin/new-relic.hpi /usr/share/jenkins/ref/plugins/
 
 # As we just use the artefacts a smaller image can be used as final target
 FROM alpine:latest 
