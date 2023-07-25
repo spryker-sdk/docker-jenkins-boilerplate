@@ -1,4 +1,4 @@
-ARG JENKINS_VERSION=2.387.1
+ARG JENKINS_VERSION=2.401.2
 
 FROM jenkins/jenkins:${JENKINS_VERSION} as jenkins_cli
 USER root
