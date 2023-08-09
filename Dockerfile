@@ -1,4 +1,4 @@
-ARG JENKINS_VERSION=2.401.2
+ARG JENKINS_VERSION=2.401.3
 
 FROM jenkins/jenkins:${JENKINS_VERSION} as jenkins_cli
 USER root
@@ -16,7 +16,7 @@ RUN curl -sSL https://github.com/newrelic/nr-jenkins-plugin/releases/download/v$
     cp /tmp/nr-jenkins-plugin/new-relic.hpi /usr/share/jenkins/ref/plugins/
 
 # As we just use the artefacts a smaller image can be used as final target
-FROM alpine:latest 
+FROM alpine:latest
 COPY --from=jenkins /usr/share/jenkins/ref/plugins /usr/share/jenkins/ref/plugins
 COPY --from=jenkins /usr/share/jenkins/jenkins.war /usr/share/jenkins/jenkins.war
 COPY --from=jenkins_cli /usr/share/jenkins/jenkins-cli.jar /usr/share/jenkins/jenkins-cli.jar
