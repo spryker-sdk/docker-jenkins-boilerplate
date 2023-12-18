@@ -8,3 +8,4 @@ workflow-step-api:639.v6eca_cd8c04a_a_
 configuration-as-code:1616.v11393eccf675
 throttle-concurrents:2.14
 PrioritySorter:5.0.0
+prometheus:2.4.1
