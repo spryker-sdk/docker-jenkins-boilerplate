@@ -1,8 +1,8 @@
-ARG JENKINS_VERSION=2.401.3
+ARG JENKINS_VERSION=2.442
 
 FROM jenkins/jenkins:${JENKINS_VERSION} as jenkins_cli
 USER root
-RUN bash -c "jenkins.sh &" && sleep 45 && \
+RUN bash -c "jenkins.sh &" && sleep 100 && \
     curl http://localhost:8080/jnlpJars/jenkins-cli.jar -o /usr/share/jenkins/jenkins-cli.jar
 
 FROM jenkins/jenkins:${JENKINS_VERSION} as jenkins
