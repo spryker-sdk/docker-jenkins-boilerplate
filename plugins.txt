@@ -1,5 +1,6 @@
 metrics:4.2.21-449.v6960d7c54c69
 credentials:1319.v7eb_51b_3a_c97b_
+cloudbees-disk-usage-simple:203.v3f46a_7462b_1a_
 token-macro:400.v35420b_922dcb_
 snakeyaml-api:2.2-111.vc6598e30cc65
 jackson2-api:2.16.1-373.ve709c6871598
