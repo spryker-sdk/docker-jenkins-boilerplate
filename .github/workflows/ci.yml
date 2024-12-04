@@ -10,7 +10,7 @@ jobs:
       matrix:
         include:
           - image: "Dockerfile"
-            tags: [ "spryker/jenkins-boilerplate:2.471", "spryker/jenkins-boilerplate:latest" ]
+            tags: [ "spryker/jenkins-boilerplate:2.488", "spryker/jenkins-boilerplate:latest" ]
             platforms: [ "linux/amd64", "linux/arm64" ]
     steps:
       - name: Set up QEMU
