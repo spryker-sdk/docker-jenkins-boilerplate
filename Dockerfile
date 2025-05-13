@@ -1,4 +1,4 @@
-ARG JENKINS_VERSION=2.492.3
+ARG JENKINS_VERSION
 
 FROM jenkins/jenkins:${JENKINS_VERSION} AS jenkins_cli
 USER root
@@ -7,7 +7,7 @@ RUN bash -c "jenkins.sh &" && sleep 100 && \
 
 FROM jenkins/jenkins:${JENKINS_VERSION} AS jenkins
 ARG NEWRELIC_PLUGIN_VERSION=1.0.5
-COPY plugins.txt /tmp/plugins.txt
+COPY plugins/${JENKINS_VERSION}/plugins.txt /tmp/plugins.txt
 USER root
 RUN curl -sSL https://github.com/newrelic/nr-jenkins-plugin/releases/download/v${NEWRELIC_PLUGIN_VERSION}/nr-jenkins-${NEWRELIC_PLUGIN_VERSION}.zip -o /tmp/newrelic.zip && \
     cd /tmp && unzip /tmp/newrelic.zip && \

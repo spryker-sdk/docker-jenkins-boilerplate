@@ -1,0 +1,17 @@
+metrics:4.2.30-468.v5973151f8cfc
+credentials:1415.v831096eb_5534
+cloudbees-disk-usage-simple:239.v6a_f1a_c1c8046
+token-macro:444.v52de7e9c573d
+snakeyaml-api:2.3-125.v4d77857a_b_402
+jackson2-api:2.18.3-402.v74c4eb_f122b_2
+variant:70.va_d9f17f859e0
+workflow-step-api:700.v6e45cb_a_5a_a_21
+configuration-as-code:1958.vddc0d369b_e16
+throttle-concurrents:2.16
+PrioritySorter:5.3.0
+prometheus:2.5.3
+disable-job-button:1.v9db_352414f90
+jobConfigHistory:1305.vf20a_356586b_8
+role-strategy:756.v978cb_392eb_d3
+audit-trail:395.vce180b_359a_b_5
+aws-cloudwatch-logs-publisher:1.2.0
