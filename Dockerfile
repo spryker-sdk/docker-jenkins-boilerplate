@@ -1,3 +1,5 @@
+ARG JENKINS_VERSION=${JENKINS_VERSION}
+
 FROM jenkins/jenkins:${JENKINS_VERSION} AS jenkins_cli
 USER root
 RUN bash -c "jenkins.sh &" && sleep 100 && \
