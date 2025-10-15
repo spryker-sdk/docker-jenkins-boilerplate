@@ -1,13 +1,16 @@
 ARG JENKINS_VERSION
 
-FROM jenkins/jenkins:${JENKINS_VERSION} AS jenkins_cli
+FROM jenkins/jenkins:${JENKINS_VERSION:-2.516.1} AS jenkins_cli
 USER root
 RUN bash -c "jenkins.sh &" && sleep 100 && \
     curl http://localhost:8080/jnlpJars/jenkins-cli.jar -o /usr/share/jenkins/jenkins-cli.jar
 
-FROM jenkins/jenkins:${JENKINS_VERSION} AS jenkins
+FROM jenkins/jenkins:${JENKINS_VERSION:-2.516.1} AS jenkins
 ARG NEWRELIC_PLUGIN_VERSION=1.0.5
 COPY plugins/${JENKINS_VERSION}/plugins.txt /tmp/plugins.txt
+COPY plugins/${JENKINS_VERSION}/casc.yaml /usr/share/jenkins/ref/casc.yaml
+COPY plugins/${JENKINS_VERSION}/bootstrap_token.groovy /usr/share/jenkins/ref/init.groovy.d/bootstrap_token.groovy
+
 USER root
 RUN curl -sSL https://github.com/newrelic/nr-jenkins-plugin/releases/download/v${NEWRELIC_PLUGIN_VERSION}/nr-jenkins-${NEWRELIC_PLUGIN_VERSION}.zip -o /tmp/newrelic.zip && \
     cd /tmp && unzip /tmp/newrelic.zip && \
@@ -17,6 +20,9 @@ RUN curl -sSL https://github.com/newrelic/nr-jenkins-plugin/releases/download/v$
 
 # As we just use the artefacts a smaller image can be used as final target
 FROM alpine:latest
+
 COPY --from=jenkins /usr/share/jenkins/ref/plugins /usr/share/jenkins/ref/plugins
+COPY --from=jenkins /usr/share/jenkins/ref/casc.yaml /usr/share/jenkins/ref/casc.yaml
+COPY --from=jenkins /usr/share/jenkins/ref/init.groovy.d/bootstrap_token.groovy /usr/share/jenkins/ref/init.groovy.d/bootstrap_token.groovy
 COPY --from=jenkins /usr/share/jenkins/jenkins.war /usr/share/jenkins/jenkins.war
 COPY --from=jenkins_cli /usr/share/jenkins/jenkins-cli.jar /usr/share/jenkins/jenkins-cli.jar

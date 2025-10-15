@@ -1,0 +1,22 @@
+unclassified:
+  location:
+    url: "${JENKINS_URL}"
+
+jenkins:
+  securityRealm:
+    oic:
+      clientId: "${OIDC_CLIENT_ID}"
+      clientSecret: "${OIDC_CLIENT_SECRET}"
+      userNameField: "email"
+      emailFieldName: "email"
+      fullNameFieldName: "name"
+      groupsFieldName: '["cognito:groups"]'
+      pkceEnabled: true
+      sendScopesInTokenRequest: true
+      serverConfiguration:
+        wellKnown:
+          wellKnownOpenIDConfigurationUrl: "${OIDC_WELL_KNOWN}"  # e.g. https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_XXXX/.well-known/openid-configuration
+          scopesOverride: "openid profile email"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
