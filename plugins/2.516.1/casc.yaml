@@ -3,6 +3,10 @@ unclassified:
     url: "${JENKINS_URL}"
 
 jenkins:
+  projectNamingStrategy:
+    roleBasedProjectNamingStrategy:
+      forceExistingJobs: false
+
   securityRealm:
     oic:
       clientId: "${OIDC_CLIENT_ID}"
@@ -10,13 +14,60 @@ jenkins:
       userNameField: "email"
       emailFieldName: "email"
       fullNameFieldName: "name"
-      groupsFieldName: '["cognito:groups"]'
+      groupsFieldName: "groups"
       pkceEnabled: true
       sendScopesInTokenRequest: true
       serverConfiguration:
         wellKnown:
-          wellKnownOpenIDConfigurationUrl: "${OIDC_WELL_KNOWN}"  # e.g. https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_XXXX/.well-known/openid-configuration
+          wellKnownOpenIDConfigurationUrl: "${OIDC_WELL_KNOWN}"
           scopesOverride: "openid profile email"
+
   authorizationStrategy:
-    loggedInUsersCanDoAnything:
-      allowAnonymousRead: false
+    roleBased:
+      roles:
+        global:
+          - name: "admin"
+            description: "Full administrative access"
+            permissions:
+              - "Overall/Read"
+              - "Overall/Administer"
+            entries:
+              - group: "jenkins-admins"
+              - user:  "svc-spryker"
+
+          - name: "viewer"
+            description: "Read-only access to view jobs and builds"
+            permissions:
+              - "Overall/Read"
+              - "Job/Read"
+              - "Job/ExtendedRead"
+              - "Job/Discover"
+              - "Run/Read"
+            entries:
+              - group: "jenkins-viewer"
+
+          - name: "developer"
+            description: "Can build, view, and cancel jobs"
+            permissions:
+              - "Overall/Read"
+              - "Job/Read"
+              - "Job/Build"
+              - "Job/Cancel"
+              - "Run/Read"
+              - "Run/Replay"
+            entries:
+              - group: "jenkins-developer"
+
+          - name: "bootstrap-config-runner"
+            description: "Service role for CI/CD pipelines to configure jobs-as-code"
+            permissions:
+              - "Overall/Read"
+              - "Job/Read"
+              - "Job/ExtendedRead"
+              - "Job/Discover"
+              - "Job/Create"
+              - "Job/Configure"
+              - "Job/Delete"
+              - "Job/Build"
+            entries:
+              - group: "jenkins-bootstrap-config-runner"
