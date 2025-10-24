@@ -14,4 +14,3 @@ disable-job-button:1.3.vf55949267366
 jobConfigHistory:1356.ve360da_6c523a_
 role-strategy:840.v206ff7f7312e
 audit-trail:436.vc0d1e79fc5a_3
-aws-cloudwatch-logs-publisher:1.2.0
