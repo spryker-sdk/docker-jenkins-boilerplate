@@ -13,13 +13,19 @@ jobs:
             jenkins_version: "2.492.3"
             tags:
               - "spryker/jenkins-boilerplate:2.492.3"
-              - "spryker/jenkins-boilerplate:latest"
             platforms: [ "linux/amd64", "linux/arm64" ]
 
           - image: "Dockerfile"
             jenkins_version: "2.504.1"
             tags:
               - "spryker/jenkins-boilerplate:2.504.1"
+            platforms: [ "linux/amd64", "linux/arm64" ]
+
+          - image: "Dockerfile"
+            jenkins_version: "2.516.3"
+            tags:
+              - "spryker/jenkins-boilerplate:2.516.3"
+              - "spryker/jenkins-boilerplate:latest"
             platforms: [ "linux/amd64", "linux/arm64" ]
     steps:
       - name: Set up QEMU

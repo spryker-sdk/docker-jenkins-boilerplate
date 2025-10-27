@@ -5,7 +5,7 @@ token-macro:444.v52de7e9c573d
 snakeyaml-api:2.3-125.v4d77857a_b_402
 jackson2-api:2.18.3-402.v74c4eb_f122b_2
 variant:70.va_d9f17f859e0
-workflow-step-api:700.v6e45cb_a_5a_a_21
+workflow-step-api:704.ve4f0967e98fa_
 configuration-as-code:1958.vddc0d369b_e16
 throttle-concurrents:2.16
 PrioritySorter:5.3.0
