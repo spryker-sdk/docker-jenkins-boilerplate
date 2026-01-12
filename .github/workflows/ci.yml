@@ -22,9 +22,9 @@ jobs:
             platforms: [ "linux/amd64", "linux/arm64" ]
 
           - image: "Dockerfile"
-            jenkins_version: "2.516.1"
+            jenkins_version: "2.516.3"
             tags:
-              - "spryker/jenkins-boilerplate:2.516.1"
+              - "spryker/jenkins-boilerplate:2.516.3"
               - "spryker/jenkins-boilerplate:latest"
             platforms: [ "linux/amd64", "linux/arm64" ]
     steps:
