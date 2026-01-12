@@ -4,12 +4,18 @@ import java.nio.file.*
 import java.nio.charset.StandardCharsets
 import groovy.transform.Field
 
+// ===== SSO enablement check =====
+// Exit early if SSO is disabled via SPRYKER_SCHEDULER_SSO_ENABLED environment variable
+if (System.getenv('SPRYKER_SCHEDULER_SSO_ENABLED') != 'true') {
+  println "[bootstrap] SSO is disabled (SPRYKER_SCHEDULER_SSO_ENABLED != true); skipping token generation"
+  return
+}
+
 // ===== env / dynamic path =====
 @Field final String REGION    = System.getenv('AWS_REGION') ?: 'unknown-region'
 @Field final String PROJECT   = System.getenv('SPRYKER_PROJECT_NAME') ?: 'unknown-project'
 @Field final List<String> SSM_PARAMS = [
-  "/${PROJECT}/base_task_definition/SPRYKER_SCHEDULER_PASSWORD",
-  "/${PROJECT}/codebuild/base_task_definition/SPRYKER_SCHEDULER_PASSWORD",
+  "/${PROJECT}/custom-secrets/SPRYKER_SCHEDULER_PASSWORD",
 ]
 
 // Jenkins user to mint token for

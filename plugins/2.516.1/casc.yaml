@@ -9,8 +9,8 @@ jenkins:
 
   securityRealm:
     oic:
-      clientId: "${OIDC_CLIENT_ID}"
-      clientSecret: "${OIDC_CLIENT_SECRET}"
+      clientId: "${SPRYKER_SCHEDULER_OIDC_CLIENT_ID}"
+      clientSecret: "${SPRYKER_SCHEDULER_OIDC_CLIENT_SECRET}"
       userNameField: "email"
       emailFieldName: "email"
       fullNameFieldName: "name"
@@ -19,7 +19,7 @@ jenkins:
       sendScopesInTokenRequest: true
       serverConfiguration:
         wellKnown:
-          wellKnownOpenIDConfigurationUrl: "${OIDC_WELL_KNOWN}"
+          wellKnownOpenIDConfigurationUrl: "${SPRYKER_SCHEDULER_OIDC_WELL_KNOWN}"
           scopesOverride: "openid profile email"
 
   authorizationStrategy:
