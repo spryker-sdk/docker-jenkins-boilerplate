@@ -1,11 +1,11 @@
 ARG JENKINS_VERSION
 
-FROM jenkins/jenkins:${JENKINS_VERSION:-2.516.1} AS jenkins_cli
+FROM jenkins/jenkins:${JENKINS_VERSION} AS jenkins_cli
 USER root
 RUN bash -c "jenkins.sh &" && sleep 100 && \
     curl http://localhost:8080/jnlpJars/jenkins-cli.jar -o /usr/share/jenkins/jenkins-cli.jar
 
-FROM jenkins/jenkins:${JENKINS_VERSION:-2.516.1} AS jenkins
+FROM jenkins/jenkins:${JENKINS_VERSION} AS jenkins
 ARG NEWRELIC_PLUGIN_VERSION=1.0.5
 COPY plugins/${JENKINS_VERSION}/plugins.txt /tmp/plugins.txt
 COPY plugins/${JENKINS_VERSION}/casc.yaml /usr/share/jenkins/ref/casc.yaml
