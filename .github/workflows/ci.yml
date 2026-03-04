@@ -21,7 +21,7 @@ jobs:
               - "spryker/jenkins-boilerplate:2.504.1"
             platforms: [ "linux/amd64", "linux/arm64" ]
 
-          - image: "Dockerfile"
+          - image: "Dockerfile.sso"
             jenkins_version: "2.516.3"
             tags:
               - "spryker/jenkins-boilerplate:2.516.3"
