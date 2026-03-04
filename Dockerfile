@@ -18,7 +18,6 @@ RUN curl -sSL https://github.com/newrelic/nr-jenkins-plugin/releases/download/v$
 
 # As we just use the artefacts a smaller image can be used as final target
 FROM alpine:latest
-
 COPY --from=jenkins /usr/share/jenkins/ref/plugins /usr/share/jenkins/ref/plugins
 COPY --from=jenkins /usr/share/jenkins/jenkins.war /usr/share/jenkins/jenkins.war
 COPY --from=jenkins_cli /usr/share/jenkins/jenkins-cli.jar /usr/share/jenkins/jenkins-cli.jar
