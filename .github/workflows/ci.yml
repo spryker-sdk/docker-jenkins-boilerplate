@@ -28,7 +28,7 @@ jobs:
             platforms: [ "linux/amd64", "linux/arm64" ]
 
           - image: "Dockerfile.sso"
-            jenkins_version: "2.555.1-jdk21"
+            jenkins_version: "2.555.1"
             tags:
               - "spryker/jenkins-boilerplate:2.555.1"
               - "spryker/jenkins-boilerplate:latest"
