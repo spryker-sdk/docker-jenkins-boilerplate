@@ -1,0 +1,17 @@
+metrics:4.2.37-494.v06f9a_939d33a_
+credentials:1506.v948b_b_b_7dec44
+cloudbees-disk-usage-simple:270.vfb_6898193d8d
+token-macro:477.vd4f0dc3cb_cf1
+snakeyaml-api:2.5-149.v72471e9c6371
+jackson2-api:2.22.0-439.vb_b_43658d6176
+variant:70.va_d9f17f859e0
+workflow-step-api:724.v538c2362b_dfb_
+configuration-as-code:2099.ve3a_6e23f4960
+throttle-concurrents:2.18
+PrioritySorter:5.3.0
+prometheus:2.5.3
+disable-job-button:1.3.vf55949267366
+jobConfigHistory:1367.vc8fa_b_15101dc
+role-strategy:878.v6f1d3b_3a_0769
+audit-trail:455.v2ee2f7a_da_b_25
+oic-auth:4.690.v5821cf665e43
