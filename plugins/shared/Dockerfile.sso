@@ -8,7 +8,7 @@ RUN bash -c "jenkins.sh &" && sleep 100 && \
 FROM jenkins/jenkins:${JENKINS_VERSION} AS jenkins
 ARG NEWRELIC_PLUGIN_VERSION=1.0.5
 COPY plugins/${JENKINS_VERSION}/plugins.txt /tmp/plugins.txt
-COPY plugins/${JENKINS_VERSION}/casc.yaml /usr/share/jenkins/ref/casc.yaml
+COPY plugins/shared/casc.v2.yaml /usr/share/jenkins/ref/casc.yaml
 COPY plugins/shared/bootstrap_token.groovy /usr/share/jenkins/ref/init.groovy.d/bootstrap_token.groovy
 
 USER root
