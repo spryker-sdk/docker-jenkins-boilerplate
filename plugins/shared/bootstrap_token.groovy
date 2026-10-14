@@ -1,12 +1,25 @@
 import jenkins.model.Jenkins
+import jenkins.model.ProjectNamingStrategy
 import hudson.model.User
+import hudson.security.AuthorizationStrategy
+import hudson.security.SecurityRealm
 import java.nio.file.*
 import java.nio.charset.StandardCharsets
 import groovy.transform.Field
 
 // ===== SSO enablement check =====
-// Exit early if SSO is disabled via SPRYKER_SCHEDULER_SSO_ENABLED environment variable
+// Exit early if SSO is disabled via SPRYKER_SCHEDULER_SSO_ENABLED environment variable.
+// JENKINS_HOME may be persisted (e.g. EFS) from a previous SSO-enabled run, so reset the
+// stored OIDC realm / role-based authorization back to unsecured instead of just skipping.
 if (System.getenv('SPRYKER_SCHEDULER_SSO_ENABLED') != 'true') {
+  def jenkins = Jenkins.get()
+  if (jenkins.isUseSecurity()) {
+    println "[bootstrap] SSO is disabled; resetting persisted security (realm=${jenkins.securityRealm.getClass().name}, authz=${jenkins.authorizationStrategy.getClass().name}) to unsecured"
+    jenkins.setSecurityRealm(SecurityRealm.NO_AUTHENTICATION)
+    jenkins.setAuthorizationStrategy(AuthorizationStrategy.UNSECURED)
+    jenkins.setProjectNamingStrategy(ProjectNamingStrategy.DEFAULT_NAMING_STRATEGY)
+    jenkins.save()
+  }
   println "[bootstrap] SSO is disabled (SPRYKER_SCHEDULER_SSO_ENABLED != true); skipping token generation"
   return
 }
