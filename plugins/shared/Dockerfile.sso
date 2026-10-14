@@ -2,8 +2,8 @@ ARG JENKINS_VERSION
 
 FROM jenkins/jenkins:${JENKINS_VERSION} AS jenkins_cli
 USER root
-RUN bash -c "jenkins.sh &" && sleep 100 && \
-    curl http://localhost:8080/jnlpJars/jenkins-cli.jar -o /usr/share/jenkins/jenkins-cli.jar
+RUN unzip -p /usr/share/jenkins/jenkins.war 'WEB-INF/lib/cli-*.jar' > /usr/share/jenkins/jenkins-cli.jar && \
+    test -s /usr/share/jenkins/jenkins-cli.jar
 
 FROM jenkins/jenkins:${JENKINS_VERSION} AS jenkins
 ARG NEWRELIC_PLUGIN_VERSION=1.0.5
@@ -15,7 +15,7 @@ USER root
 RUN curl -sSL https://github.com/newrelic/nr-jenkins-plugin/releases/download/v${NEWRELIC_PLUGIN_VERSION}/nr-jenkins-${NEWRELIC_PLUGIN_VERSION}.zip -o /tmp/newrelic.zip && \
     cd /tmp && unzip /tmp/newrelic.zip && \
     ls -l /tmp/ && \
-    jenkins-plugin-cli --plugin-file /tmp/plugins.txt && bash -c "jenkins.sh &" && \
+    jenkins-plugin-cli --plugin-file /tmp/plugins.txt && \
     cp /tmp/nr-jenkins-plugin/new-relic.hpi /usr/share/jenkins/ref/plugins/
 
 # As we just use the artefacts a smaller image can be used as final target
